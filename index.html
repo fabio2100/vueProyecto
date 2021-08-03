@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis ideas</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+  
+  <div id='app' style="padding: 2em;">
+    <section class='hero'>
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Mis ideas
+          </h1>
+          <h2 class="subtitle">
+            Proyecto vue
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <div class="columns">
+      <div class="column">
+        <section class='hero'>
+          <div class="hero-body">
+            <div class="container">
+              <h2 class="subtitle">
+                Registrar idea
+              </h2>
+              <div class="field">
+                <label class="label">Idea</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Ingrese la idea" v-model='ideaTxt'>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Prioridad</label>
+                <div class="control">
+                  <div class="select">
+                    <select v-model="prioridad">
+                      <option value='B'>Baja</option>
+                      <option value='M'>Media</option>
+                      <option value='I'>Super importante</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button class="button is-link" @click='agregarIdea()'>Agregate tu idea</button>
+              <button class="button is-link" @click='cargarDatosUsuarios()'>Recuperar datos</button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="column">
+        <section class='hero'>
+          <div class="hero-body">
+            <div class="container">
+              <h2 class="subtitle">
+                Lista de ideas
+              </h2>
+            </div>
+            <div class="field">
+              <label class="label">Busqueda</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Buscador" v-model='searchTxt'>
+              </div>
+            <table class="table">
+              <thead>
+                <th>Idea</th>
+                <th>Prioridad</th>
+                <th>Acciones</th>
+              </thead>
+              <tbody>
+                <tr v-for='i in listaIdea'>
+                  <td>{{i.ideaTxt}}</td>
+                  <td>
+                    <span v-if="i.prioridad==='M'" class="tag is-info">Media</span>
+                    <span v-else-if="i.prioridad==='I'" class="tag is-warning">Importante</span>
+                    <span v-else class="tag is-primary">Baja</span></td>
+                  <td><button @click='eliminarIdea(i.id)' class="button is-danger">Eliminar</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <th>Idea</th>
+        <th>Prioridad</th>
+        <th>Acciones</th>
+      </thead>
+      <tbody>
+        <tr v-for='i in listaUsuarios'>
+          <td>{{i.email}}</td>
+          <td>
+            <span v-if="i.id<2" class="tag is-info">Media</span>
+            <span v-else-if="i.id<5" class="tag is-warning">Importante</span>
+            <span v-else class="tag is-primary">Baja</span></td>
+          <td><button @click='eliminarIdea(i.id)' class="button is-danger">Eliminar</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="ideas.js"></script>
+</body>
+</html>
