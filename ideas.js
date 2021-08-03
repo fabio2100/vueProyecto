@@ -32,6 +32,10 @@ new Vue({
            console.log(self.listaUsuarios)
          }
       )
+    },
+    eliminarUsuario : function(email){
+      let index = this.listaUsuarios.findIndex(e=>e.email===email);
+      this.listaUsuarios.splice(index,1)
     }
     },
   watch: {
